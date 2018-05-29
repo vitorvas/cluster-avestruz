@@ -11,6 +11,12 @@
 \usepackage{amssymb}
 \usepackage[font=bf,center]{caption}
 \usepackage{subfigure}
+\usepackage{fancybox} 		%Para usar shadowbox
+
+% tudo isso é pra usar a shadowbox
+\usepackage[framemethod=tikz]{mdframed}
+\usetikzlibrary{shadows}
+\newmdenv[shadow=true,shadowcolor=black,font=\sffamily,rightmargin=8pt]{shadedbox}
 
 % para garantir o portugues
 \usepackage[brazilian]{babel}
@@ -117,6 +123,11 @@ como \textbf{root} executar:
 
 \texttt{systemctl set-default multi-user.target}
 
+\begin{shadedbox}
+A console utilizada para acessar as máquinas escravas pode não ser capaz 
+de exibir a interface gráfica Nvidia. Ao prosseguir com a instalação, é recomendável 
+utilizar um monitor externo conectado à saída HDMI da máquina em instalação.
+\end{shadedbox}
 
 %------------------------------------------------------------------------------
 \section{INSTALAÇÃO}
