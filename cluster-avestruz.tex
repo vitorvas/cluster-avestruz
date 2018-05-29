@@ -101,12 +101,27 @@ os recursos básicos do terminal.
 Para a instalação do \textit{driver} a partir do \textit{download} 
 no site da Nvidia, são necessárias versões mínimas de componentes 
 do sistema operacional \footnote{O comando \texttt{Xorg} só funciona 
-quando a interface gráfica estiver carregada, naturalmente.}
+quando a interface gráfica estiver carregada, naturalmente.} 
+
+Esta NI se baseia na versão \texttt{CentOS Linux release 7.5.1804 (Core)} 
+e foi feita com as seguintes versões de programas e módulos abaixo:
 
 \begin{tabbing}
-Linux kernel \= 2.4.7 \= : \= \texttt{cat /proc/version} \\
-X.Org \> 1.19 \> : \> \texttt{Xorg -version} \\
+Linux kernel \= 3.10.0 \= : \= \texttt{cat /proc/version} \\
+X.Org \> 1.19.5 \> : \> \texttt{Xorg -version} \\
 modutils \> 20 \> : \> \texttt{insmod -V}
+\end{tabbing}
+
+Caso o \textit{driver} não possua a interface pré-compilada, pode ser necessário 
+compilar a camada de interface com o kernel. Além dos pacotes de desenvolvimento 
+para o kernel que devem estar presentes, o \textit{driver} ainda necessitará dos 
+programas abaixo nas versões mínimas:
+
+\begin{tabbing}
+GNU make	 \= 3.82	\= : \= \texttt{make --version} \\
+binutils	 \> 2.27	\> : \> \texttt{size --version} \\
+gcc 		 \> 4.8.5	\> : \> \texttt{gcc --version} \\
+glibc	 \> 2.27	\> : \> \texttt{ls /lib/libc.so.6}\\
 \end{tabbing}
 
 \subsection{Versão do \textit{driver}}
