@@ -1,0 +1,218 @@
+% Este texto é para falar da utilização do GRUB no laboratório
+% Porque e algumas dicas de configuração.
+% Conforme for crescendo, vamos colocando outras.
+% Vai virar documentação.
+
+\documentclass[twoside,a4paper,12pt,english]{inac17}
+
+%INAC2017 SETUP: SET PAGE SIZE AND SET FOR USING graphicx PACKAGE.
+\usepackage{graphicx}
+\usepackage{varioref,epsfig} %,rotating}
+\usepackage{amssymb}
+\usepackage[font=bf,center]{caption}
+\usepackage{subfigure}
+
+% para garantir o portugues
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{textcomp}             % Para usar marca registrada
+
+\title{Manual de instalação do \textit{driver} NVIDIA para XOrg em uma máquina escrava do cluster de Laboratório de Termo-hidráulica do CDTN}
+
+\author{
+  \bf{Vitor Vasconcelos Ara\'ujo Silva}\\ \\
+  CDTN - Centro de Desenvolvimento da Tecnologia Nuclear\\
+  Av. Ant\^onio Carlos 6627 - Campus UFMG\\
+  31270-901 - Belo Horizonte, MG\\
+  vitors@cdtn.br}
+
+\begin{document}
+
+\maketitle
+
+% Acrescentado para facilitar a redação da NI associada
+% Nao sei porque tem que aparecer duas vezes...
+%\tableofcontents
+%\tableofcontents
+
+
+%INAC2017 SETUP: SETUP HEADS FOR PAGES
+\pagestyle{myheadings}
+\thispagestyle{empty}
+\markboth{}{}
+
+
+%INAC2017 SETUP: SET FIRST PAGE WITH NO PAGE NUMBER
+\thispagestyle{empty}
+
+%--------------------------------------------------------------------------------------
+\begin{abstract_full_paper}
+\end{abstract_full_paper}
+
+%--------------------------------------------------------------------------------------
+\section{INTRODUÇÃO}\label{int}
+
+A instalação padrão da distribuição CentOS Linux instala \textit{driver}s 
+abertos para a interface gráfica XOrg. Para tirar total proveito 
+da capacidade de processamento das placas gráficas Nvidia M4000, 
+que equipam as máquinas escravas do cluster do SETRE, é necessário 
+substituir os \textit{driver}s instaladas por padrão pelos fornecidos pela 
+Nvidia, fabricante das placas de vídeo (também chamadas GPUs). 
+
+Esta NI detalha o processo de instalação dos \textit{driver}s do fabricante 
+em um sistema CentOS instalado por padrão com interface gráfica XOrg. 
+Além dos procedimentos técnicos, são listadas as versões de softwares 
+necessários para a instalação, bem como dos \textit{driver}s a serem instalados. A principal referência na instalação deste sistema 
+é o guia de instalação da Nvidia \cite{inst-nvidia}.
+
+Espera-se que o procedimento descrito nesta nota seja atualizado 
+a cada instalação de novas versões de \textit{driver}s Nvidia nas máquinas 
+escravas do cluster de acordo com os procedimentos destes novos 
+\textit{driver}s.
+
+As instruções fornecidas nesta nota \textbf{não contemplam} a 
+instalação do sistema CUDA para uso duplo-propósito das GPUs 
+Nvidia.
+
+%--------------------------------------------------------------------------------------
+\subsection{Versões de ferramentas mínimas}
+
+Para a instalação do \textit{driver} a partir do \textit{download} 
+no site da Nvidia, são necessárias versões mínimas de componentes 
+do sistema operacional \footnote{O comando \texttt{Xorg} só funciona 
+quando a interface gráfica estiver carregada, naturalmente.}
+
+\begin{tabbing}
+Linux kernel \= 2.4.7 \= : \= \texttt{cat /proc/version} \\
+X.Org \> 1.19 \> : \> \texttt{Xorg -version} \\
+modutils \> 20 \> : \> \texttt{insmod -V}
+\end{tabbing}
+
+\subsection{Versão do \textit{driver}}
+
+Este documento trata da instalação do \textit{driver}:
+
+\texttt{NVIDIA-Linux-x86\_64-390.59.run}
+
+Este é o arquivo do \textit{driver} unificado da Nvidia para 
+Linux plataforma x86\_64 e deve ser baixado do site da Nvidia, podendo  eventualmente receber outro nome na distriubição. É importante 
+atenção às informações fornecidas pelo site da fabricante para 
+fazer o download do \textit{driver} correto para a plataforma 
+do cluster.
+
+\subsection{Informação adicional pré-instalação}
+
+Antes de iniciar a instalação, é importante sair do servidor X e 
+finalizar todas as aplicações que façam uso do OpenGL. Cabe notar 
+que algumas aplicações OpenGL podem persistir em execução após 
+o término do servidor X).
+
+Para garantir uma instalação o mais suável possível, é recomendado 
+desabilitar o uso de interfaces gráficas em nível de execução. No 
+jargão Linux, significa definir o \textit{default run level} para 
+o modo multi-usuário \textbf{sem} interface gráfica. Para isso, 
+como \textbf{root} executar:
+
+\texttt{systemctl set-default multi-user.target}
+
+
+%------------------------------------------------------------------------------
+\section{INSTALAÇÃO}
+
+
+%------------------------------------------------------------------------------
+\section{METHODS AND PROCEDURES}
+
+%------------------------------------------------------------------------------
+\subsection{Local Structure}
+
+
+%------------------------------------------------------------------------------
+\subsection{Hardware and Software}
+
+%\begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
+%  \centering\includegraphics[width=8.5cm,height=8.5cm]{images/esquema_cluster_edited_bw.png}
+%  \centering\includegraphics[scale=0.7]{images/cluster-rede.png}
+%  \caption{Cluster showing its network topology.}
+%  \label{fig:esquema-cluster}
+%\end{figure}
+
+
+%------------------------------------------------------------------------------
+\subsubsection{GRUB2}
+\label{ssub:grub}
+
+GRUB is...
+
+%------------------------------------------------------------------------------
+
+\section{RESULTS AND ANALYSIS}
+
+
+%------------------------------------------------------------------------------
+
+\section{CONCLUSIONS AND PERSPECTIVES}
+
+
+%Uma cita\c{c}\~{a}o \cite{Henderson17}.
+
+
+%------------------------------------------------------------------------------
+
+
+
+\section*{Acknowledgments}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{99} %99 é o número máximo que o thebibliography permite. Numero de referencias que aparecerão.
+
+\bibitem{inst-nvidia} ``NVIDIA Accelerated Linux Graphics \textit{driver} README and Installation Guide'', \\\verb#http://us.download.nvidia.com/XFree86/Linux-x86/173.14.12/README/index.html# (Maio de 2018).
+
+%\bibitem{Dongarra2017} John Dongarra et. al., ``With Extreme Computing, the Rules Have Changed'', \textit{Computing in Science Engineering}, \textbf{19}, pp. 52--62, (2017).
+
+%\bibitem{CUDA} John Nickolls, Ian Buck, Michael Garland and Kevin Skadron, ``Scalable Parallel Programming with CUDA'', \textit{Queue - GPU Computing}, \textbf{6}, pp. 40--53, (2008).
+
+%\bibitem{accelerators} ``What is GPU-accelerated computing?'', \\\verb#http://www.nvidia.com/object/what-is-gpu-computing.html# (2017).
+
+%\bibitem{windows7} Jorge Orchilles, \textit{Microsoft Windows 7 Administrator's Reference}, Syngress, Boston USA (2010).
+  
+  % Centos
+%\bibitem{centos} ``The CentOS Project'', \verb#https://www.centos.org# (2017).
+
+%\bibitem{yum} ``man7.org yum man page'', \verb#http://man7.org/linux/man-pages/man8/yum.8.html# (2017).
+  
+%\bibitem{Boettiger} Carl Boettiger, ``An introduction to Docker for reproducible research'', \textit{SIGOPS Operating System Review}, \textbf{49}, pp. 71--79, (2015).
+
+%\bibitem{Tommaso} Paolo Di Tommaso et al. ``The Impact of Docker Containers on the Performance of Genomic Pipelines'' \textit{PeerJ}, \textbf{3}, (2015).
+
+  % Virtualizacao (9 e 10)
+%\bibitem{vir1} A. J. Younge and G. C. Fox, ``Advanced Virtualization Techniques for High Performance Cloud Cyberinfrastructure'', \textit{2014 14th IEEE/ACM International Symposium on Cluster, Cloud and Grid Computing}, Chicago, IL, USA, pp. 583--586, May, (2014).
+  
+%\bibitem{vir2} I. Sadooghi, J. H. Martin, T. Li, K. Brandstatter, K. Maheshwari, T. P. P. de Lacerda Ruivo, G. Garzoglio, S. Timm, Y. Zhao and I. Raicu, ``Understanding the Performance and Potential of Cloud Computing for Scientific Applications'', \textit{IEEE Transactions on Cloud Computing}, \textbf{5}, pp. 358--371, (2017).
+  
+%\bibitem{linuxbook} Wirzenius and Lars, \textit{The  Linux System Administrator's Guide}, iUniverse incorporated (2000).
+
+%\bibitem{hal} Benjamin Depardon, Ga\"{e}l Le Mahec and Cyril S\'{e}guin, ``Analysis of Six Distributed File Systems'', Research Report, pp. 44, (2013).
+  
+%\bibitem{gluster} Alex Davies and Alessandro Orsaria, ``Scale out with GlusterFS'', \textit{The Linux Journal}, \textbf{2013}, (2013).
+
+%\bibitem{lustre} ``Lustre* Software Release 2.x: Operations Manual'', Editor: Intel Corporation, (2017).
+
+%\bibitem{paraview} Ayachit, Utkarsh, \textit{The ParaView Guide: A Parallel Visualization Application}, Kitware, ISBN 978-1930934306, (2015).
+
+  %\bibitem{gpgpu}  John D. Owens, David Luebke, Naga Govindaraju, Mark Harris, Jens Kr\"{u}ger, Aaron E. Lefohn, and Tim Purcell, ``A Survey of General-Purpose Computation on Graphics Hardware'', \textit{Computer Graphics Forum}, \textbf{26(1)}, pp. 80--113, March (2007).
+
+  %\bibitem{opencl} J. E. Stone, D. Gohara and G. Shi, ``OpenCL: A Parallel Programming Standard for Heterogeneous Computing Systems'', \textit{Computing in Science \& Engineering}, \textbf{12(3)}, pp. 66--73, May-June (2010).
+
+\end{thebibliography}
+
+% ---------------------------------------------------------
+% Minha bibliografia usando arquivo externo
+%\bibliographystyle{unsrt}
+%\bibliography{bibli}
+
+
+\end{document}
