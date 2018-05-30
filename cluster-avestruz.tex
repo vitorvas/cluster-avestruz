@@ -179,7 +179,24 @@ seguinte comando:
 \texttt{sh NVIDIA-Linux-x86\_64-390.59.run}
 
 Caso seja a primeira tentativa de instalação do \textit{driver} Nvidia sobre uma 
-instalação original do CentOS, o instalador informará 
+instalação original do CentOS, o instalador informará que não é possível instalar 
+o \textit{driver} Nvidia devido à presença dos \textit{drivers} nouveau\footnote{Estes são versões abertas de \textit{drivers} compatíveis com o \textit{hardware} da Nvidia presentes na distribuição padrão CentOS.}. O instalador 
+oferecerá a opção de deixá-lo modificar as configurações para tentar resolver 
+o problema. 
+
+\begin{shadedbox}
+A opção automática oferecida pelo \textit{driver} Nvidia para remoção dos 
+\textit{drivers} nouveau \textbf{não funciona}. Seguir as instruções para sua 
+remoção manual.
+\end{shadedbox}
+
+\subsection{Remoção das \textit{drivers} incompatíveis e configuração de 
+atualização automática}
+
+
+\texttt{systemctl set-default graphical.target}
+
+
 %------------------------------------------------------------------------------
 \section{METHODS AND PROCEDURES}
 
