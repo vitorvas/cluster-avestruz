@@ -168,7 +168,7 @@ utilizar um monitor externo conectado à saída HDMI da máquina em instalação
 \end{shadedbox}
 
 %------------------------------------------------------------------------------
-\section{INSTALAÇÃO}
+\section{INSTALAÇÃO}\label{inst}
 
 Neste texto o \textit{driver} \texttt{NVIDIA-Linux-x86\_64-390.59.run} está localizado no diretório \texttt{/home/neutronica/software/drivers/nvidia}, assim 
 como na máquina avestruz-lx. Para iniciar a instalação, a partir 
@@ -193,12 +193,85 @@ remoção manual.
 \subsection{Remoção das \textit{drivers} incompatíveis e configuração de 
 atualização automática}
 
+Para garantir que os \textit{drivers} instalados serão atualizados em eventuais 
+atualizações do sistema operacional, devem estar instalados dois componentes do 
+CentOS. Os comandos de instalação não terão efeito caso os pacotes já estejam 
+instalados. Para isso, basta executar:
+
+\texttt{yum -y install epel-release dkms}
+
+Este comando instalará os pacotes \texttt{epel-release}, pacotes extras para 
+a configuração do repositório do CentOS e também o pacote \texttt{dkms}, um 
+\textit{framework} para suporte a módulos dinâmicos no \textit{kernel} do Linux.
+
+As instruções para a remoção dos drivers nouveau são simples mas devem ser seguidas 
+à risca.
+
+\begin{shadedbox}
+Pede-se especial atenção para a execução dos comandos abaixo. Estes comandos devem 
+ser executados como superusuário e alteram configurações de carregamento de módulos 
+do \textit{kernel} do Linux que podem deixar o sistema inoperante e sem possibilidade 
+de \textit{boot}. Caso tenha dúvidas sobre como proceder contacte um usuário 
+experiente ou o administrador do sistema.
+\end{shadedbox}
+
+Antes de prosseguir, assegure-se de que o sistema está executando a última versão 
+do \textit{kernel}. Em caso de dúvidas, basta reiniciar a máquina com o comando 
+
+\texttt{shutdown -r now}
+
+e aguardar a re-inicialização.
+
+Sempre como superusuário, altere o conteúdo do arquivo \texttt{/etc/default/grub} 
+acrescentando ao fim da \textit{string} de texto \texttt{GRUB\_CMDLINE\_LINUX} 
+o seguinte texto:
+
+\texttt{rd.driver.blacklist=nouveau nouveau.modeset=0}
+
+%%%%%%% REMOVIDA PARA EVITAR QUEBRA DE TEXTO - Informação exagerada 
+%A linha modificada ficará similar\footnote{Dependendo das configurações 
+%atuais do grup do sistema.} à apresentada abaixo:
+%\texttt{GRUB\_CMDLINE\_LINUX="crashkernel=auto rd.lvm.lv=cl\_avestruz-lx/root %rd.lvm.lv=cl\_avestruz-lx/swap rhgb quiet rd.driver.blacklist=nouveau %nouveau.modeset=0"}
+
+Em seguida, para adicionar as mudanças acima à configuração do sistema, gere um novo arquivo de configuração do grub utilizando o comando:
+
+ \texttt{grub2-mkconfig -o /boot/grub2/grub.cfg}
+
+O próximo passo consiste em editar (ou criar, caso este arquivo não exista) 
+o arquivo \texttt{/etc/modprobe.d/blacklist.conf}. Adicionar no seu fim (ou 
+acrescentar caso esteja vazio) a seguinte linha:
+
+\texttt{blacklist nouveau}
+
+Finalmente, antes de gerar um novo arquivo de configuração de diretórios 
+do sistema de arquivos (\texttt{initramfs}), fazer a copia de segurança 
+do arquivo original com o seguinte comando e depois construir um novo baseado nas novas configurações (\textbf{ATENÇÃO AO DIGITAR AS LINHA SEGUINTES):}
+
+\texttt{mv /boot/initramfs-\$(uname -r).img /boot/initramfs-\$(uname -r)-nouveau.img}
+
+\texttt{dracut /boot/initramfs-\$(uname -r).img \$(uname -r)}
+
+Ao final deste procedimento, re-iniciar a máquina. Após o \texttt{boot}, 
+repetir o prodimento descrito no primeiro parágrafo da seção \ref{inst}. 
+Algumas telas de informação da instalação são apresentadas a seguir. Seguir 
+as informações apresentadas nas telas.
+
 
 \texttt{systemctl set-default graphical.target}
 
 
+
+
 %------------------------------------------------------------------------------
-\section{METHODS AND PROCEDURES}
+\section{CONFIGURAÇÃO}
+
+Infelizmente, a configuração automática do instalador do \textit{driver} da Nvidia 
+não funciona automaticamente na máquina avestruz (e provavelmente falhará igualmente 
+nas outras máquinas escravas). Sendo assim, é necessário configurar manualmente 
+o arquivo \texttt{/etc/X11/Xorg.conf} de modo a tornar visível para o sistema 
+de interface gráfica XOrg o dispositivo (a placa de vídeo) recentemente instalado.
+
+Para isso...
 
 %------------------------------------------------------------------------------
 \subsection{Local Structure}
