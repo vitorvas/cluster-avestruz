@@ -58,6 +58,15 @@
 \end{abstract_full_paper}
 
 %--------------------------------------------------------------------------------------
+\section*{Nomenclatura e tipos}
+\begin{itemize}
+\item Textos em \textit{itálico} são usados para grafar palavras fora da Língua Portuguesa;
+\item Textos em \texttt{fonte monoespaçada} são usados para comandos Linux 
+reprensentado o \textit{shell} do terminal. Podem ou não ser precedidos do 
+símbolo \texttt{\$} representando o \textit{shell};
+\item Textos em \shadowbox{caixas flutuantes} são usados para informações extras e/ou importantes
+\end{itemize}
+%--------------------------------------------------------------------------------------
 \section{INTRODUÇÃO}\label{int}
 
 A instalação padrão da distribuição CentOS Linux instala \textit{driver}s 
@@ -124,6 +133,7 @@ gcc 		 \> 4.8.5	\> : \> \texttt{gcc --version} \\
 glibc	 \> 2.27	\> : \> \texttt{ls /lib/libc.so.6}\\
 \end{tabbing}
 
+
 \subsection{Versão do \textit{driver}}
 
 Este documento trata da instalação do \textit{driver}:
@@ -160,7 +170,16 @@ utilizar um monitor externo conectado à saída HDMI da máquina em instalação
 %------------------------------------------------------------------------------
 \section{INSTALAÇÃO}
 
+Neste texto o \textit{driver} \texttt{NVIDIA-Linux-x86\_64-390.59.run} está localizado no diretório \texttt{/home/neutronica/software/drivers/nvidia}, assim 
+como na máquina avestruz-lx. Para iniciar a instalação, a partir 
+deste diretório e como superusuário (\texttt{root}), deve ser dado o 
+seguinte comando:
 
+%\texttt{[neutronica@avestruz-lx nvidia]\$ sh NVIDIA-Linux-x86\_64-390.59.run}
+\texttt{sh NVIDIA-Linux-x86\_64-390.59.run}
+
+Caso seja a primeira tentativa de instalação do \textit{driver} Nvidia sobre uma 
+instalação original do CentOS, o instalador informará 
 %------------------------------------------------------------------------------
 \section{METHODS AND PROCEDURES}
 
