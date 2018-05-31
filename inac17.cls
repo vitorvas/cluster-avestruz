@@ -152,9 +152,9 @@
         \fi
         ##1}}}}
 \fi
-\def\ps@myheadings{% Helio 05/04/2017
-    \def\@oddfoot{{\upshape\scriptsize{INAC 2017, Belo Horizonte, MG, Brazil.}}\hfil}
-    \def\@evenfoot{{\upshape\scriptsize{INAC 2017, Belo Horizonte, MG, Brazil.}}\hfil}
+\def\ps@myheadings{% Helio 05/04/2017 - Modificado por Vitor Vasconcelos em 30/05/2-18
+    \def\@oddfoot{{\upshape\scriptsize{Nota Interna, Centro de Desenvolvimento da Tecnologia Nuclear.}}\hfil}
+    \def\@evenfoot{{\upshape\scriptsize{Nota Interna, Centro de Desenvolvimento da Tecnologia Nuclear.}}\hfil}
     \def\@evenhead{\hfil\upshape\scriptsize\leftmark\hfil}% Helio 18/02/13
     \def\@oddhead{\hbox{}\hfil{\upshape\scriptsize\rightmark}\hfil}% Helio 18/02/13
     \let\@mkboth\@gobbletwo
@@ -233,22 +233,27 @@
 \def\comp{\fontfamily{ptm}\fontsize{8}{11pt}\selectfont} %Helio 05/04/2017
 
 \newsavebox{\Cabecalho}
-\newsavebox{\ISBN}
+\newsavebox{\CDTN}
 
-\sbox{\Cabecalho}{\parbox[c]{10.5cm}{\comp 
-                                     \textit{2017 International Nuclear Atlantic Conference - INAC 2017 \\[-2.5pt]
-                                     Belo Horizonte, MG, Brazil, October 22-27, 2017 \\[-2.5pt]
-                                     ASSOCIA\c C\~AO BRASILEIRA DE ENERGIA NUCLEAR - ABEN}
-                                     }}
+\sbox{\Cabecalho}{\parbox[c]{10.5cm}{\comp
+    \textit{NOTA INTERNA XX-2018\\[-2.5pt]
+      Centro de Desenvolvimento da Tecnologia Nuclear - CDTN\\[-2.5pt]
+      Comissão Nacional de Energia Nuclear - CNEN}
+  }}
 
-\sbox{\ISBN}{\parbox[c]{3.0cm}{\includegraphics[width=2.5cm,totalheight=1.5cm]{isbn.png}}}
+%  \textit{2017 International Nuclear Atlantic Conference - INAC 2017 \\[-2.5pt]
+%                                     Belo Horizonte, MG, Brazil, October 22-27, 2017 \\[-2.5pt]
+%                                     ASSOCIA\c C\~AO BRASILEIRA DE ENERGIA NUCLEAR - ABEN}
+%                                     }}
+
+\sbox{\CDTN}{\parbox[c]{3.0cm}{\includegraphics[width=3.0cm,totalheight=1.5cm]{logo-cdtn.png}}}
 
 
 \def\@maketitle{%
   \newpage
   \null
   \vspace{-2.0cm}
-  \parbox{\textwidth}{\usebox{\Cabecalho}\hfill\raisebox{0pt}{\usebox{\ISBN}}} %Helio 05/04/2017
+  \parbox{\textwidth}{\usebox{\Cabecalho}\hfill\raisebox{0pt}{\usebox{\CDTN}}} %Helio 05/04/2017
   \vspace{-0.1cm}%  
   \begin{center}%
   \let \footnote \thanks
