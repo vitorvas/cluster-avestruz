@@ -69,15 +69,15 @@ símbolo \texttt{\$} representando o \textit{shell};
 %--------------------------------------------------------------------------------------
 \section{INTRODUÇÃO}\label{int}
 
-A instalação padrão da distribuição CentOS Linux instala \textit{driver}s 
-abertos para a interface gráfica XOrg. Para tirar total proveito 
+Numa instalação padrão da distribuição CentOS Linux são fornecidos \textit{drivers} 
+abertos para a interface gráfica \textit{XOrg}. Entretanto, para tirar total proveito 
 da capacidade de processamento das placas gráficas Nvidia M4000, 
 que equipam as máquinas escravas do cluster do SETRE, é necessário 
-substituir os \textit{driver}s instaladas por padrão pelos fornecidos pela 
+substituir os \textit{drivers} instaladas por padrão pelos fornecidos pela 
 Nvidia, fabricante das placas de vídeo (também chamadas GPUs). 
 
 Esta NI detalha o processo de instalação dos \textit{driver}s do fabricante 
-em um sistema CentOS instalado por padrão com interface gráfica XOrg. 
+em um sistema CentOS instalado por padrão com interface gráfica \textit{XOrg}. 
 Além dos procedimentos técnicos, são listadas as versões de softwares 
 necessários para a instalação, bem como dos \textit{driver}s a serem instalados. A principal referência na instalação deste sistema 
 é o guia de instalação da Nvidia \cite{inst-nvidia}.
@@ -151,9 +151,9 @@ do cluster.
 Antes de iniciar a instalação, é importante sair do servidor X e 
 finalizar todas as aplicações que façam uso do OpenGL. Cabe notar 
 que algumas aplicações OpenGL podem persistir em execução após 
-o término do servidor X).
+o término do servidor X.
 
-Para garantir uma instalação o mais suável possível, é recomendado 
+Para garantir uma instalação o mais fácil possível, é recomendado 
 desabilitar o uso de interfaces gráficas em nível de execução. No 
 jargão Linux, significa definir o \textit{default run level} para 
 o modo multi-usuário \textbf{sem} interface gráfica. Para isso, 
