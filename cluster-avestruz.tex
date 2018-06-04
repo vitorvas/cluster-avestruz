@@ -25,7 +25,7 @@
 
 \usepackage{textcomp}             % Para usar marca registrada
 
-\title{Manual de instalação do \textit{driver} NVIDIA para XOrg em uma máquina escrava do cluster de Laboratório de Termo-hidráulica do CDTN}
+\title{Receita de instalação do \textit{driver} NVIDIA para XOrg em uma máquina escrava do cluster de Laboratório de Termo-hidráulica}
 
 \author{
   \bf{Vitor Vasconcelos Ara\'ujo Silva}\\ \\
@@ -271,47 +271,80 @@ nas outras máquinas escravas). Sendo assim, é necessário configurar manualmen
 o arquivo \texttt{/etc/X11/Xorg.conf} de modo a tornar visível para o sistema 
 de interface gráfica XOrg o dispositivo (a placa de vídeo) recentemente instalado.
 
-Para isso...
+Para isso é necessário explicitamente adicionar as definições da placa de vídeo 
+como dispositivo pci ao arquivo de configuração citado acima. Antes de iniciar a 
+configuração, garantir o backup do arquivo atual em caso de falhas renomeando-o:
+
+\texttt{mv /etc/X11/Xorg.conf /etc/X11/Xorg.conf.before-nvidia}
+
+Uma vez movido o arquivo original, deve ser criado um novo arquivo com a 
+nova configuração do X11. Antes de editar o novo arquivo, é necessário 
+confirmar qual o endereço do dispositivo pci (placa gráfica Nvidia). 
+
+
+\texttt{lspci | grep VGA}
+
+O presente caso, serão apresentados dois dispositivos. Isso se dá pois o 
+sistema em questão possui duas placas gráficas. Verificar \textbf{atentamente} 
+qual o endereço da placa Nvidia, já que este endereço pode variar de acordo 
+com o hardware utilizado.
+
+\begin{shadedbox}
+Para o caso da máquina \texttt{Avestruz}, o endereço retornado é: \textbf{04:00.0}. 
+Atenção, pois na configuração do arquivo \texttt{/etc/X11/Xorg.conf} são usados 
+apenas os valores unitários separados por pontos. Sendo assim, o obtido deve 
+ser preenchido neste arquivo como \textbf{4:0:0}, por exemplo.
+\end{shadedbox}
+
+Com essa informação em mãos, o próximo passo consiste em criar um novo arquivo 
+\texttt{Xorg.conf} no diretório \texttt{/etc/X11} (sempre como superusuário) 
+utilizando um editor de textos sem formatação. Neste exemplo, será utilizado o 
+\textit{vi}, parte da instalação \textit{default} do \textit{CentOS}. Para isso, 
+digitar:
+
+\texttt{vi /etc/X11/Xorg.conf}
+
+Pressionar a letra $i$ para entrar no modo de edição e digitar:
+
+
+Ao fim, para gravar as informações e sair do \textit{vi}, pressionar a tecla 
+\textit{ESC} e digitar: \texttt{:wq} e então \textit{ENTER}. Com isso, será 
+gravado o novo arquivo de configuração do X11 para utilização do hardware 
+Nvidia disponível.
+
+É recomendável manter a máquina em modo não-gráfico até que o administrador 
+esteja seguro do funcionamento completo do sistema com a placa gráfica Nvidia. 
+Para isso, basta configurar o sistema para inicialização sem o modo gráfico:
+
+\texttt{systemctl set-default multiuser.target}
+
+Re-iniciar a máquina.
 
 %------------------------------------------------------------------------------
-\subsection{Local Structure}
+\section{INFORMAÇÕES ADICIONAIS}
 
+Cabe lembrar que um monitor externo deve estar conectado à uma das saídas HDMI 
+traseiras da máquina para que seja possível verificar a saída gráfica da máquina. 
+A console disponível para configuração do sistema de cluster não está conectada 
+à saída física da placa Nvidia.
 
-%------------------------------------------------------------------------------
-\subsection{Hardware and Software}
+Com o sistema configurado para modo multi-usuário (ou \textit{non-graphical}) 
+basta iniciar o sistema X11 pela linha de comando. Isso é feito utilizando o comando: 
+\texttt{startx}.
 
-%\begin{figure}[h] % t forces top and b forces bottom: can be added to h, ex. [ht]
-%  \centering\includegraphics[width=8.5cm,height=8.5cm]{images/esquema_cluster_edited_bw.png}
-%  \centering\includegraphics[scale=0.7]{images/cluster-rede.png}
-%  \caption{Cluster showing its network topology.}
-%  \label{fig:esquema-cluster}
-%\end{figure}
+\section{CONCLUSÕES}
 
+Esta Nota Interna provê informações no formato \textit{cookbook} para a instalação 
+dos \textit{drivers} originais fornecidos pela Nvidia para as placas gráficas modelo M4000 pertencentes ao cluster do SETRE.
 
-%------------------------------------------------------------------------------
-\subsubsection{GRUB2}
-\label{ssub:grub}
-
-GRUB is...
-
-%------------------------------------------------------------------------------
-
-\section{RESULTS AND ANALYSIS}
-
-
-%------------------------------------------------------------------------------
-
-\section{CONCLUSIONS AND PERSPECTIVES}
-
-
-%Uma cita\c{c}\~{a}o \cite{Henderson17}.
-
+A instalação destes \textit{drivers} visa à utilização da interface gráfica do 
+sistema X11 do Linux na sua máxima capacidade. As instruções fornecidas nesta Nota 
+Interna \textbf{não} visam à instalação de sistemas para uso genérico de GPUs, 
+como o CUDA oferecido pela própria Nvídia.
 
 %------------------------------------------------------------------------------
 
 
-
-\section*{Acknowledgments}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
