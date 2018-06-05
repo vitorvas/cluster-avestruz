@@ -7,14 +7,14 @@ CDTN para conexão com internet para instalação e testes
 do MCNP6.2 recebeu o nome de *avestruz* e, portanto,
 *avestruz-lx* para a partição Linux.
 
-Markup: - - - -
+Markup : - - - -
 
 NOTAS
 
-Markup: * Este documento é uma adaptação do modelo utilizado no INAC 2017.
+Markup : * Este documento é uma adaptação do modelo utilizado no INAC 2017.
 	* Formatado para Nota Interna do CDTN de modo simplificado.
 	* Utiliza pacotes não-padrão (conferir na seção usepackage).
 
-Markup: - - - -
+Markup : - - - -
 
 Para executar: pdflatex cluster-avestrux.tex
