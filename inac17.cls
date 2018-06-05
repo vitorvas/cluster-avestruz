@@ -153,8 +153,8 @@
         ##1}}}}
 \fi
 \def\ps@myheadings{% Helio 05/04/2017 - Modificado por Vitor Vasconcelos em 30/05/2-18
-    \def\@oddfoot{{\upshape\scriptsize{Nota Interna, Centro de Desenvolvimento da Tecnologia Nuclear.}}\hfil}
-    \def\@evenfoot{{\upshape\scriptsize{Nota Interna, Centro de Desenvolvimento da Tecnologia Nuclear.}}\hfil}
+    \def\@oddfoot{{\upshape\scriptsize{Nota Interna - Centro de Desenvolvimento da Tecnologia Nuclear.}}\hfil}
+    \def\@evenfoot{{\upshape\scriptsize{Nota Interna - Centro de Desenvolvimento da Tecnologia Nuclear.}}\hfil}
     \def\@evenhead{\hfil\upshape\scriptsize\leftmark\hfil}% Helio 18/02/13
     \def\@oddhead{\hbox{}\hfil{\upshape\scriptsize\rightmark}\hfil}% Helio 18/02/13
     \let\@mkboth\@gobbletwo
@@ -238,7 +238,7 @@
 \sbox{\Cabecalho}{\parbox[c]{10.5cm}{\comp
     \textit{NOTA INTERNA XX-2018\\[-2.5pt]
       Centro de Desenvolvimento da Tecnologia Nuclear - CDTN\\[-2.5pt]
-      Comissão Nacional de Energia Nuclear - CNEN}
+      Comiss\~{a}o Nacional de Energia Nuclear - CNEN}
   }}
 
 %  \textit{2017 International Nuclear Atlantic Conference - INAC 2017 \\[-2.5pt]
