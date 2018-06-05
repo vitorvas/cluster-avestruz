@@ -12,6 +12,7 @@
 \usepackage[font=bf,center]{caption}
 \usepackage{subfigure}
 \usepackage{fancybox} 		%Para usar shadowbox
+\usepackage{fancyvrb}        %Para usar um verbatim especial que preserva espaços
 
 % tudo isso é pra usar a shadowbox
 \usepackage[framemethod=tikz]{mdframed}
@@ -235,7 +236,7 @@ o seguinte texto:
 
 Em seguida, para adicionar as mudanças acima à configuração do sistema, gere um novo arquivo de configuração do grub utilizando o comando:
 
- \texttt{grub2-mkconfig -o /boot/grub2/grub.cfg}
+\texttt{grub2-mkconfig -o /boot/grub2/grub.cfg}
 
 O próximo passo consiste em editar (ou criar, caso este arquivo não exista) 
 o arquivo \texttt{/etc/modprobe.d/blacklist.conf}. Adicionar no seu fim (ou 
@@ -268,14 +269,14 @@ as informações apresentadas nas telas.
 Infelizmente, a configuração automática do instalador do \textit{driver} da Nvidia 
 não funciona automaticamente na máquina avestruz (e provavelmente falhará igualmente 
 nas outras máquinas escravas). Sendo assim, é necessário configurar manualmente 
-o arquivo \texttt{/etc/X11/Xorg.conf} de modo a tornar visível para o sistema 
+o arquivo \texttt{/etc/X11/xorg.conf} de modo a tornar visível para o sistema 
 de interface gráfica XOrg o dispositivo (a placa de vídeo) recentemente instalado.
 
 Para isso é necessário explicitamente adicionar as definições da placa de vídeo 
 como dispositivo pci ao arquivo de configuração citado acima. Antes de iniciar a 
 configuração, garantir o backup do arquivo atual em caso de falhas renomeando-o:
 
-\texttt{mv /etc/X11/Xorg.conf /etc/X11/Xorg.conf.before-nvidia}
+\texttt{mv /etc/X11/xorg.conf /etc/X11/xorg.conf.before-nvidia}
 
 Uma vez movido o arquivo original, deve ser criado um novo arquivo com a 
 nova configuração do X11. Antes de editar o novo arquivo, é necessário 
@@ -291,21 +292,33 @@ com o hardware utilizado.
 
 \begin{shadedbox}
 Para o caso da máquina \texttt{Avestruz}, o endereço retornado é: \textbf{04:00.0}. 
-Atenção, pois na configuração do arquivo \texttt{/etc/X11/Xorg.conf} são usados 
+Atenção, pois na configuração do arquivo \texttt{/etc/X11/xorg.conf} são usados 
 apenas os valores unitários separados por pontos. Sendo assim, o obtido deve 
 ser preenchido neste arquivo como \textbf{4:0:0}, por exemplo.
 \end{shadedbox}
 
 Com essa informação em mãos, o próximo passo consiste em criar um novo arquivo 
-\texttt{Xorg.conf} no diretório \texttt{/etc/X11} (sempre como superusuário) 
+\texttt{xorg.conf} no diretório \texttt{/etc/X11} (sempre como superusuário) 
 utilizando um editor de textos sem formatação. Neste exemplo, será utilizado o 
 \textit{vi}, parte da instalação \textit{default} do \textit{CentOS}. Para isso, 
 digitar:
 
-\texttt{vi /etc/X11/Xorg.conf}
+\texttt{vi /etc/X11/xorg.conf}
 
 Pressionar a letra $i$ para entrar no modo de edição e digitar:
 
+\begin{Verbatim}[tabsize=4]
+Section "Module"
+	Load "modesetting"
+EndSection
+
+Section "Device"
+	Indentifier "nvidia"
+	Driver "nvidia"
+	BusID  "PCI:4:0:0"
+	Option "AllowEmptyInitialConfiguration"
+EndSection
+\end{Verbatim}
 
 Ao fim, para gravar as informações e sair do \textit{vi}, pressionar a tecla 
 \textit{ESC} e digitar: \texttt{:wq} e então \textit{ENTER}. Com isso, será 
