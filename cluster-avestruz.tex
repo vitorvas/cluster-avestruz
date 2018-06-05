@@ -62,8 +62,8 @@
 \section*{Nomenclatura e tipos}
 \begin{itemize}
 \item Textos em \textit{itálico} são usados para grafar palavras fora da Língua Portuguesa;
-\item Textos em \texttt{fonte monoespaçada} são usados para comandos Linux 
-reprensentado o \textit{shell} do terminal. Podem ou não ser precedidos do 
+\item Textos em \texttt{fonte mono-espaçada} são usados para comandos Linux 
+representando o \textit{shell} do terminal. Podem ou não ser precedidos do 
 símbolo \texttt{\$} representando o \textit{shell};
 \item Textos em \shadowbox{caixas flutuantes} são usados para informações extras e/ou importantes
 \end{itemize}
@@ -97,7 +97,7 @@ Nvidia.
 
 Assume-se que o leitor desta nota tenha conhecimento básico na utilização do 
 terminal Linux e também um conhecimento básico sobre a arquitetura do sistema 
-Linux em relação ao funcionamento de serviços e uma idéia geral do funcionamento 
+Linux em relação ao funcionamento de serviços e uma ideia geral do funcionamento 
 do \textit{kernel} (é suficiente saber que módulos são carregados, executados, etc.).
 Um texto elegante sobre introdução à utilização do terminal no Linux é o capítulo 
 1 do livro \textit{Effective Computation in Physics: Field Guide to Research with Python} \cite{Scopatz2015}.
@@ -142,7 +142,7 @@ Este documento trata da instalação do \textit{driver}:
 \texttt{NVIDIA-Linux-x86\_64-390.59.run}
 
 Este é o arquivo do \textit{driver} unificado da Nvidia para 
-Linux plataforma x86\_64 e deve ser baixado do site da Nvidia, podendo  eventualmente receber outro nome na distriubição. É importante 
+Linux plataforma x86\_64 e deve ser baixado do site da Nvidia, podendo  eventualmente receber outro nome na distribuição. É importante 
 atenção às informações fornecidas pelo site da fabricante para 
 fazer o download do \textit{driver} correto para a plataforma 
 do cluster.
@@ -157,7 +157,7 @@ o término do servidor X.
 Para garantir uma instalação o mais fácil possível, é recomendado 
 desabilitar o uso de interfaces gráficas em nível de execução. No 
 jargão Linux, significa definir o \textit{default run level} para 
-o modo multi-usuário \textbf{sem} interface gráfica. Para isso, 
+o modo multiusuário \textbf{sem} interface gráfica. Para isso, 
 como \textbf{root} executar:
 
 \texttt{systemctl set-default multi-user.target}
@@ -212,7 +212,7 @@ As instruções para a remoção dos drivers nouveau são simples mas devem ser 
 Pede-se especial atenção para a execução dos comandos abaixo. Estes comandos devem 
 ser executados como superusuário e alteram configurações de carregamento de módulos 
 do \textit{kernel} do Linux que podem deixar o sistema inoperante e sem possibilidade 
-de \textit{boot}. Caso tenha dúvidas sobre como proceder contacte um usuário 
+de \textit{boot}. Caso tenha dúvidas sobre como proceder contate um usuário 
 experiente ou o administrador do sistema.
 \end{shadedbox}
 
@@ -221,7 +221,7 @@ do \textit{kernel}. Em caso de dúvidas, basta reiniciar a máquina com o comand
 
 \texttt{shutdown -r now}
 
-e aguardar a re-inicialização.
+e aguardar a reinicialização.
 
 Sempre como superusuário, altere o conteúdo do arquivo \texttt{/etc/default/grub} 
 acrescentando ao fim da \textit{string} de texto \texttt{GRUB\_CMDLINE\_LINUX} 
@@ -252,8 +252,8 @@ do arquivo original com o seguinte comando e depois construir um novo baseado na
 
 \texttt{dracut /boot/initramfs-\$(uname -r).img \$(uname -r)}
 
-Ao final deste procedimento, re-iniciar a máquina. Após o \texttt{boot}, 
-repetir o prodimento descrito no primeiro parágrafo da seção \ref{inst}. 
+Ao final deste procedimento, reiniciar a máquina. Após o \texttt{boot}, 
+repetir o procedimento descrito no primeiro parágrafo da seção \ref{inst}. 
 Algumas telas de informação da instalação são apresentadas a seguir. Seguir 
 as informações apresentadas nas telas.
 
@@ -273,14 +273,14 @@ o arquivo \texttt{/etc/X11/xorg.conf} de modo a tornar visível para o sistema
 de interface gráfica XOrg o dispositivo (a placa de vídeo) recentemente instalado.
 
 Para isso é necessário explicitamente adicionar as definições da placa de vídeo 
-como dispositivo pci ao arquivo de configuração citado acima. Antes de iniciar a 
-configuração, garantir o backup do arquivo atual em caso de falhas renomeando-o:
+como dispositivo PCI ao arquivo de configuração citado acima. Antes de iniciar a 
+configuração, garantir o \texttt{backup} do arquivo atual em caso de falhas renomeando-o:
 
 \texttt{mv /etc/X11/xorg.conf /etc/X11/xorg.conf.before-nvidia}
 
 Uma vez movido o arquivo original, deve ser criado um novo arquivo com a 
 nova configuração do X11. Antes de editar o novo arquivo, é necessário 
-confirmar qual o endereço do dispositivo pci (placa gráfica Nvidia). 
+confirmar qual o endereço do dispositivo PCI (placa gráfica Nvidia). 
 
 
 \texttt{lspci | grep VGA}
@@ -331,7 +331,7 @@ Para isso, basta configurar o sistema para inicialização sem o modo gráfico:
 
 \texttt{systemctl set-default multiuser.target}
 
-Re-iniciar a máquina.
+Reiniciar a máquina.
 
 %------------------------------------------------------------------------------
 \section{INFORMAÇÕES ADICIONAIS}
@@ -341,7 +341,7 @@ traseiras da máquina para que seja possível verificar a saída gráfica da má
 A console disponível para configuração do sistema de cluster não está conectada 
 à saída física da placa Nvidia.
 
-Com o sistema configurado para modo multi-usuário (ou \textit{non-graphical}) 
+Com o sistema configurado para modo multiusuário (ou \textit{non-graphical}) 
 basta iniciar o sistema X11 pela linha de comando. Isso é feito utilizando o comando: 
 \texttt{startx}.
 
@@ -353,7 +353,7 @@ dos \textit{drivers} originais fornecidos pela Nvidia para as placas gráficas m
 A instalação destes \textit{drivers} visa à utilização da interface gráfica do 
 sistema X11 do Linux na sua máxima capacidade. As instruções fornecidas nesta Nota 
 Interna \textbf{não} visam à instalação de sistemas para uso genérico de GPUs, 
-como o CUDA oferecido pela própria Nvídia.
+como o CUDA oferecido pela própria Nvidia.
 
 %------------------------------------------------------------------------------
 
