@@ -236,7 +236,7 @@
 \newsavebox{\CDTN}
 
 \sbox{\Cabecalho}{\parbox[c]{10.5cm}{\comp
-    \textit{NOTA INTERNA XX-2018\\[-2.5pt]
+    \textit{NOTA INTERNA 03-2018\\[-2.5pt]
       Centro de Desenvolvimento da Tecnologia Nuclear - CDTN\\[-2.5pt]
       Comiss\~{a}o Nacional de Energia Nuclear - CNEN}
   }}
