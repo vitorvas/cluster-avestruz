@@ -13,6 +13,7 @@
 \usepackage{subfigure}
 \usepackage{fancybox} 		%Para usar shadowbox
 \usepackage{fancyvrb}        %Para usar um verbatim especial que preserva espaços
+\usepackage{pdfpages}		%Para adicionar a capa da NI template CDTN
 
 % tudo isso é pra usar a shadowbox
 \usepackage[framemethod=tikz]{mdframed}
@@ -26,7 +27,7 @@
 
 \usepackage{textcomp}             % Para usar marca registrada
 
-\title{Receita de instalação do \textit{driver} Nvidia para Xorg em uma máquina escrava do \textit{cluster} de Laboratório de Termo-hidráulica}
+\title{Receita de instalação do \textit{driver} Nvidia para Xorg em uma máquina escrava do \textit{cluster} do Laboratório de Termo-hidráulica do SETRE}
 
 \author{
   \bf{Vitor Vasconcelos Ara\'ujo Silva}\\ \\
@@ -37,12 +38,14 @@
 
 \begin{document}
 
+\includepdf[pages=-]{NI_SETRE_03_2018_capa.pdf}
+
 \maketitle
 
 % Acrescentado para facilitar a redação da NI associada
 % Nao sei porque tem que aparecer duas vezes...
-%\tableofcontents
-%\tableofcontents
+\tableofcontents
+\tableofcontents
 
 
 %INAC2017 SETUP: SETUP HEADS FOR PAGES
@@ -56,6 +59,12 @@
 
 %--------------------------------------------------------------------------------------
 \begin{abstract_full_paper}
+Nesta Nota Interna, são fornecidas as instruções necessárias para a instalação 
+do \textit{driver} do fabricante para a placa de vídeo modelo M4000 das máquinas 
+escravas do \textit{cluster} do Laboratório de Termo-hidráulica do SETRE. As 
+instruções são fornecidas em formato de receita, ou seja, passos a seguir, 
+com breves explicações sobre o que é feito. Espera-se um conhecimento básico 
+no \textit{shell} e do Sistema Operacional GNU/Linux para a execução completa dos procedimentos descritos nesta NI.
 \end{abstract_full_paper}
 
 %--------------------------------------------------------------------------------------
